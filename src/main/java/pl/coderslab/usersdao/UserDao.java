@@ -122,30 +122,53 @@ public class UserDao {
         }
     }
 
+    private boolean userExists(String email){
+        try(Connection conn = DbUtil.connect()){
+            PreparedStatement statement =
+                    conn.prepareStatement(READ_USER_BY_EMAIL_QUERY);
+            statement.setString(1, email);
+            User [] users = listUsers(statement);
+            if ((users[0] != null) && (users != null)){
+                return true;
+            }
+            return false;
 
+
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+
+        }
+
+
+    }
 
     public  User create(User user) {
-        long userId = -1;
-        try (Connection conn = DbUtil.connect()) {
-            PreparedStatement statement =
-                    conn.prepareStatement(CREATE_USER_QUERY, Statement.RETURN_GENERATED_KEYS);
-            String hashedPassword = hashPassword(user.getPassword());
-            statement.setString(1, user.getUserName());
-            statement.setString(2, user.getEmail());
-            statement.setString(3, hashedPassword);
-            statement.executeUpdate();
-            //Pobieramy wstawiony do bazy identyfikator, a następnie ustawiamy id obiektu user.
-            ResultSet resultSet = statement.getGeneratedKeys();
-            if (resultSet.next()) {
-                user.setId(resultSet.getInt(1));
-                user.setPassword(hashedPassword);
-                userId = resultSet.getInt(1);
+        if (!userExists(user.getEmail())){
+            long userId = -1;
+            try (Connection conn = DbUtil.connect()) {
+                PreparedStatement statement =
+                        conn.prepareStatement(CREATE_USER_QUERY, Statement.RETURN_GENERATED_KEYS);
+                String hashedPassword = hashPassword(user.getPassword());
+                statement.setString(1, user.getUserName());
+                statement.setString(2, user.getEmail());
+                statement.setString(3, hashedPassword);
+                statement.executeUpdate();
+                //Pobieramy wstawiony do bazy identyfikator, a następnie ustawiamy id obiektu user.
+                ResultSet resultSet = statement.getGeneratedKeys();
+                if (resultSet.next()) {
+                    user.setId(resultSet.getInt(1));
+                    user.setPassword(hashedPassword);
+                    userId = resultSet.getInt(1);
+                }
+                return user;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
             }
-            return user;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
         }
+        return null;
+
     }
 
 
@@ -243,7 +266,7 @@ public class UserDao {
             PreparedStatement statement =
                     conn.prepareStatement(SELECT_ALL_USERS_QUERY);
             User [] users =  listUsers(statement);
-            this.printUsers(users);
+//            this.printUsers(users);
             return users;
         } catch (SQLException e){
             e.printStackTrace();

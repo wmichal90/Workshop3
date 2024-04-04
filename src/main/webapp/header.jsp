@@ -27,6 +27,9 @@
     <!-- Custom styles for this template-->
     <link href="<c:url value="/theme/css/sb-admin-2.min.css"/>" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css" />
+    <link  href="<c:url value="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css" />" rel="stylesheet" />
+
 </head>
 
 <body id="page-top">
@@ -50,7 +53,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="/user/list">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>

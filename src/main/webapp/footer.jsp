@@ -67,4 +67,7 @@
 <script src="/theme/js/demo/chart-area-demo.js"></script>
 <script src="/theme/js/demo/chart-pie-demo.js"></script>
 
+<script src="/theme/js/demo/datatables-demo.js"></script>
+<script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
+
 </body>

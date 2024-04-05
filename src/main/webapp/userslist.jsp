@@ -53,7 +53,7 @@
                                 <td>${singleUser.userName}</td>
                                 <td>${singleUser.email}</td>
                                 <td>
-                                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
+                                    <a href="/user/show?id=${singleUser.id}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
                                             class="fas fa-search fa-sm text-white-50"></i></a>
                                     <a href="/user/edit?id=${singleUser.id}" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm" id="${singleUser.id}"><i
                                             class="fas fa-edit fa-sm text-white-50"></i></a>

@@ -57,7 +57,7 @@
                                             class="fas fa-search fa-sm text-white-50"></i></a>
                                     <a href="/user/edit?id=${singleUser.id}" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm" id="${singleUser.id}"><i
                                             class="fas fa-edit fa-sm text-white-50"></i></a>
-                                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i
+                                    <a href="/user/delete?id=${singleUser.id}" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i
                                             class="fas fa-trash-alt fa-sm text-white-50"></i></a>
                                 </td>
 

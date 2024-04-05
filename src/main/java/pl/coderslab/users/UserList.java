@@ -16,8 +16,10 @@ public class UserList  extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserDao userDao = new UserDao();
         User[] allUsers = userDao.findAll();
-        if (allUsers != null){
+        if (allUsers[0] != null){
             req.setAttribute("users", allUsers);
+        } else {
+            req.setAttribute("users", null);
         }
 
 
